@@ -1,0 +1,59 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ENAOFT
+    network: base
+    source:
+      address: "0x58538e6A46E07434d7E7375Bc268D3cb839C0133"
+      abi: ENAOFT
+      startBlock: 15768919
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - EnforcedOptionSet
+        - MsgInspectorSet
+        - OFTReceived
+        - OFTSent
+        - OwnershipTransferStarted
+        - OwnershipTransferred
+        - PeerSet
+        - PreCrimeSet
+        - RateLimiterSet
+        - RateLimitsChanged
+        - Transfer
+      abis:
+        - name: ENAOFT
+          file: ./abis/ENAOFT.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: EnforcedOptionSet((uint32,uint16,bytes)[])
+          handler: handleEnforcedOptionSet
+        - event: MsgInspectorSet(address)
+          handler: handleMsgInspectorSet
+        - event: OFTReceived(indexed bytes32,uint32,indexed address,uint256)
+          handler: handleOFTReceived
+        - event: OFTSent(indexed bytes32,uint32,indexed address,uint256,uint256)
+          handler: handleOFTSent
+        - event: OwnershipTransferStarted(indexed address,indexed address)
+          handler: handleOwnershipTransferStarted
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PeerSet(uint32,bytes32)
+          handler: handlePeerSet
+        - event: PreCrimeSet(address)
+          handler: handlePreCrimeSet
+        - event: RateLimiterSet(indexed address)
+          handler: handleRateLimiterSet
+        - event: RateLimitsChanged((uint32,uint256,uint256)[])
+          handler: handleRateLimitsChanged
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/enaoft.ts
