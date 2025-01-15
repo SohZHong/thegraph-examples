@@ -17,12 +17,6 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - Approval
-        - EnforcedOptionSet
-        - MsgInspectorSet
-        - OFTReceived
-        - OFTSent
-        - OwnershipTransferStarted
-        - OwnershipTransferred
         - PeerSet
         - PreCrimeSet
         - RateLimiterSet
@@ -34,18 +28,6 @@ dataSources:
       eventHandlers:
         - event: Approval(indexed address,indexed address,uint256)
           handler: handleApproval
-        - event: EnforcedOptionSet((uint32,uint16,bytes)[])
-          handler: handleEnforcedOptionSet
-        - event: MsgInspectorSet(address)
-          handler: handleMsgInspectorSet
-        - event: OFTReceived(indexed bytes32,uint32,indexed address,uint256)
-          handler: handleOFTReceived
-        - event: OFTSent(indexed bytes32,uint32,indexed address,uint256,uint256)
-          handler: handleOFTSent
-        - event: OwnershipTransferStarted(indexed address,indexed address)
-          handler: handleOwnershipTransferStarted
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
         - event: PeerSet(uint32,bytes32)
           handler: handlePeerSet
         - event: PreCrimeSet(address)
