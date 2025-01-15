@@ -1,44 +1,7 @@
-type Approval @entity(immutable: true) {
-  id: Bytes!
-  owner: Bytes! # address
-  spender: Bytes! # address
-  value: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type PeerSet @entity(immutable: true) {
-  id: Bytes!
-  eid: BigInt! # uint32
-  peer: Bytes! # bytes32
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type PreCrimeSet @entity(immutable: true) {
-  id: Bytes!
-  preCrimeAddress: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type RateLimiterSet @entity(immutable: true) {
-  id: Bytes!
-  rateLimiter: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type RateLimitsChanged @entity(immutable: true) {
-  id: Bytes!
-  rateLimitConfigs: [Bytes!]! # tuple[]
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+type User @entity {
+  id: ID! # The user's address, serves as the unique identifier
+  enaoft: BigInt! # Balance of the first token
+  centrifuge: BigInt! # Balance of the second token
 }
 
 type Transfer @entity(immutable: true) {
@@ -46,30 +9,7 @@ type Transfer @entity(immutable: true) {
   from: Bytes! # address
   to: Bytes! # address
   value: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-type Deny @entity(immutable: true) {
-  id: Bytes!
-  user: Bytes! # address
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type File @entity(immutable: true) {
-  id: Bytes!
-  what: Bytes! # bytes32
-  data: String! # string
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
-type Rely @entity(immutable: true) {
-  id: Bytes!
-  user: Bytes! # address
+  tokenAddress: Bytes! # address
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!

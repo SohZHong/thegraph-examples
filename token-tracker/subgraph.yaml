@@ -16,29 +16,15 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - PeerSet
-        - PreCrimeSet
-        - RateLimiterSet
-        - RateLimitsChanged
+        - User
         - Transfer
       abis:
         - name: ENAOFT
           file: ./abis/ENAOFT.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
-        - event: PeerSet(uint32,bytes32)
-          handler: handlePeerSet
-        - event: PreCrimeSet(address)
-          handler: handlePreCrimeSet
-        - event: RateLimiterSet(indexed address)
-          handler: handleRateLimiterSet
-        - event: RateLimitsChanged((uint32,uint256,uint256)[])
-          handler: handleRateLimitsChanged
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-      file: ./src/enaoft.ts
+          handler: handleEnaoftTransfer
+      file: ./src/mapping.ts
   - kind: ethereum
     name: centrifuge
     network: base
@@ -51,17 +37,12 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Deny
-        - File
-        - Rely
+        - User
+        - Transfer
       abis:
         - name: centrifuge
           file: ./abis/centrifuge.json
       eventHandlers:
-        - event: Deny(indexed address)
-          handler: handleDeny
-        - event: File(indexed bytes32,string)
-          handler: handleFile
-        - event: Rely(indexed address)
-          handler: handleRely
-      file: ./src/centrifuge.ts
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleCentrifugeTransfer
+      file: ./src/mapping.ts
