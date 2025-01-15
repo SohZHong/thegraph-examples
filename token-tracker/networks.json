@@ -3,6 +3,9 @@
     "ENAOFT": {
       "address": "0x58538e6A46E07434d7E7375Bc268D3cb839C0133",
       "startBlock": 15768919
+    },
+    "ERC20": {
+      "address": "0x2b51E2Ec9551F9B87B321f63b805871f1c81ba97"
     }
   }
 }

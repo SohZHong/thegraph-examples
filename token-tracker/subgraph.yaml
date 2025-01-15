@@ -39,3 +39,29 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
       file: ./src/enaoft.ts
+  - kind: ethereum
+    name: centrifuge
+    network: base
+    source:
+      address: "0x2b51E2Ec9551F9B87B321f63b805871f1c81ba97"
+      abi: centrifuge
+      startBlock: 18373515
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Deny
+        - File
+        - Rely
+      abis:
+        - name: centrifuge
+          file: ./abis/centrifuge.json
+      eventHandlers:
+        - event: Deny(indexed address)
+          handler: handleDeny
+        - event: File(indexed bytes32,string)
+          handler: handleFile
+        - event: Rely(indexed address)
+          handler: handleRely
+      file: ./src/centrifuge.ts
