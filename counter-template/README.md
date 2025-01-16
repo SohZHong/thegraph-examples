@@ -4,6 +4,8 @@ This subgraph demonstrates **The Graph's template feature**, enabling efficient 
 
 The subgraph focuses on monitoring instances of the `Counter` contract created by a single `CounterFactory` contract. Each `Counter` instance can emit events that are automatically tracked through the dynamic template system.
 
+The example output can be seen here [The Graph Playground](https://api.studio.thegraph.com/query/90479/base-net/v0.0.3)
+
 ---
 
 ## Features
