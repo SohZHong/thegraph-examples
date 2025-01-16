@@ -1,0 +1,26 @@
+type CounterCreated @entity(immutable: true) {
+  id: Bytes!
+  newCounter: Bytes! # address
+  initialNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+type CounterIncremented @entity(immutable: true) {
+  id: Bytes!
+  currentNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NumberSet @entity(immutable: true) {
+  id: Bytes!
+  newNumber: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

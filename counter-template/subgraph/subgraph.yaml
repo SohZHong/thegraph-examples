@@ -1,0 +1,49 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: CounterFactory
+    network: sepolia
+    source:
+      address: "0xf9DfDAc93c9571d2c75891bA4a5f748d31bE2C5A"
+      abi: CounterFactory
+      startBlock: 7501279
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - CounterCreated
+      abis:
+        - name: CounterFactory
+          file: ./abis/CounterFactory.json
+      eventHandlers:
+        - event: CounterCreated(address,uint256,uint256)
+          handler: handleCounterCreated
+      file: ./src/mapping.ts
+  # Add template for tracking multiple 'Counter' contracts with the same abi
+templates:
+  - kind: ethereum
+    name: Counter
+    network: sepolia
+    source:
+      abi: Counter
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - CounterIncremented
+        - NumberSet
+      abis:
+        - name: Counter
+          file: ./abis/Counter.json
+      eventHandlers:
+        - event: CounterIncremented(uint256,uint256)
+          handler: handleCounterIncremented
+        - event: NumberSet(uint256,uint256)
+          handler: handleNumberSet
+      file: ./src/mapping.ts
