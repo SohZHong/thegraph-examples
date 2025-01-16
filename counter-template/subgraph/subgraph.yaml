@@ -23,4 +23,27 @@ dataSources:
       eventHandlers:
         - event: CounterCreated(address,uint256,uint256)
           handler: handleCounterCreated
-      file: ./src/counter-factory.ts
+      file: ./src/mapping.ts
+  # Add template for tracking multiple 'Counter' contracts with the same abi
+templates:
+  - kind: ethereum
+    name: Counter
+    network: sepolia
+    source:
+      abi: Counter
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - CounterIncremented
+        - NumberSet
+      abis:
+        - name: Counter
+          file: ./abis/Counter.json
+      eventHandlers:
+        - event: CounterIncremented(uint256,uint256)
+          handler: handleCounterIncremented
+        - event: NumberSet(uint256,uint256)
+          handler: handleNumberSet
+      file: ./src/mapping.ts

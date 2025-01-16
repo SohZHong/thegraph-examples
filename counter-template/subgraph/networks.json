@@ -3,6 +3,9 @@
     "CounterFactory": {
       "address": "0xf9DfDAc93c9571d2c75891bA4a5f748d31bE2C5A",
       "startBlock": 7501279
+    },
+    "Counter": {
+      "address": "0x69b447e31efAAf60E455d00363c652C8e71a6b33"
     }
   }
 }

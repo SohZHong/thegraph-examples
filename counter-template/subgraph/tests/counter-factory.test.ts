@@ -9,7 +9,7 @@ import {
 import { Address, BigInt } from "@graphprotocol/graph-ts"
 import { CounterCreated } from "../generated/schema"
 import { CounterCreated as CounterCreatedEvent } from "../generated/CounterFactory/CounterFactory"
-import { handleCounterCreated } from "../src/counter-factory"
+import { handleCounterCreated } from "../src/mapping"
 import { createCounterCreatedEvent } from "./counter-factory-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
