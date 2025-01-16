@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "CounterFactory": {
+      "address": "0xf9DfDAc93c9571d2c75891bA4a5f748d31bE2C5A",
+      "startBlock": 7501279
+    }
+  }
+}
