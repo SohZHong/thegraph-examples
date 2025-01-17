@@ -16,17 +16,11 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - ApprovalForAll
-        - NewOwner
-        - NewResolver
-        - NewTTL
-        - Transfer
+        - Domain
       abis:
         - name: ENSRegistryWithFallback
           file: ./abis/ENSRegistryWithFallback.json
       eventHandlers:
-        - event: ApprovalForAll(indexed address,indexed address,bool)
-          handler: handleApprovalForAll
         - event: NewOwner(indexed bytes32,indexed bytes32,address)
           handler: handleNewOwner
         - event: NewResolver(indexed bytes32,address)
@@ -35,4 +29,42 @@ dataSources:
           handler: handleNewTTL
         - event: Transfer(indexed bytes32,address)
           handler: handleTransfer
-      file: ./src/ens-registry-with-fallback.ts
+      file: ./src/mapping.ts
+templates:
+  - kind: ethereum
+    name: PublicResolver
+    network: mainnet
+    source:
+      abi: PublicResolver
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - CoinAddress
+        - DNSRecord
+        - DNSRecordDeleted
+        - Domain
+        - PublicKey
+        - TextRecord
+      abis:
+        - name: PublicResolver
+          file: ./abis/PublicResolver.json
+      eventHandlers:
+        - event: AddrChanged(indexed bytes32,address)
+          handler: handleAddrChanged
+        - event: AddressChanged(indexed bytes32,uint256,bytes)
+          handler: handleAddressChanged
+        - event: DNSRecordChanged(indexed bytes32,bytes,uint16,bytes)
+          handler: handleDNSRecordChanged
+        - event: DNSRecordDeleted(indexed bytes32,bytes,uint16)
+          handler: handleDNSRecordDeleted
+        - event: DNSZonehashChanged(indexed bytes32,bytes,bytes)
+          handler: handleDNSZonehashChanged
+        - event: NameChanged(indexed bytes32,string)
+          handler: handleNameChanged
+        - event: PubkeyChanged(indexed bytes32,bytes32,bytes32)
+          handler: handlePubkeyChanged
+        - event: TextChanged(indexed bytes32,indexed string,string,string)
+          handler: handleTextChanged
+      file: ./src/mapping.ts

@@ -3,6 +3,9 @@
     "ENSRegistryWithFallback": {
       "address": "0x00000000000C2E074eC69A0dFb2997Ba6C7d2e1e",
       "startBlock": 9380380
+    },
+    "PublicResolver": {
+      "address": "0x231b0Ee14048e9dCcD1d247744d114a4EB5E8E63"
     }
   }
 }
