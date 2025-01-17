@@ -1,0 +1,55 @@
+type Domain @entity {
+  id: Bytes!
+  node: Bytes!
+  owner: Bytes
+  resolver: Bytes
+  address: Bytes
+  coinAddresses: [CoinAddress!] @derivedFrom(field: "domain")
+  dnsRecords: [DNSRecord!] @derivedFrom(field: "domain")
+  publicKey: PublicKey
+  textRecords: [TextRecord!] @derivedFrom(field: "domain")
+  name: String
+  ttl: BigInt # uint64
+  lastzonehash: Bytes
+  zonehash: Bytes
+}
+
+type CoinAddress @entity {
+  id: Bytes!
+  domain: Domain!
+  coinType: BigInt!
+  address: Bytes!
+}
+
+type DNSRecord @entity {
+  id: Bytes!
+  domain: Domain!
+  name: String!
+  resource: Int!
+  record: Bytes!
+}
+
+type PublicKey @entity {
+  id: Bytes!
+  domain: Domain!
+  x: Bytes!
+  y: Bytes!
+}
+
+type TextRecord @entity {
+  id: Bytes!
+  domain: Domain!
+  indexedKey: Bytes! # string
+  key: String! # string
+  value: String! # string
+}
+
+type DNSRecordDeleted @entity(immutable: true) {
+  id: Bytes!
+  node: Bytes! # bytes32
+  name: Bytes! # bytes
+  resource: Int! # uint16
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
