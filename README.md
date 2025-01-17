@@ -23,4 +23,8 @@ I will be adding more examples as I thought of more examples
 ### Counter Factory
 [Tracking and querying of multiple smart contracts deployed dynamically](./counter-template/README.md)
 
+### ENS Explorer
+[Track and query ENS domains and their associated details dynamically](./ens-explorer/README.md)
+
 </details>
+
