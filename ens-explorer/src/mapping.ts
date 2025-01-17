@@ -88,7 +88,9 @@ export function handleAddrChanged(event: AddrChangedEvent): void {
 export function handleAddressChanged(event: AddressChangedEvent): void {
   const domain = retrieveDomain(event.params.node);
   // Convert coinType to Bytes and concatenate with the node
-  const coinTypeBytes = Bytes.fromByteArray(ByteArray.fromBigInt(event.params.coinType));
+  const coinTypeBytes = Bytes.fromByteArray(
+    ByteArray.fromBigInt(event.params.coinType)
+  );
   const idBytes = event.params.node.concat(coinTypeBytes);
 
   // Load the CoinAddress entity using the constructed ID
@@ -108,11 +110,20 @@ export function handleAddressChanged(event: AddressChangedEvent): void {
 export function handleDNSRecordChanged(event: DNSRecordChangedEvent): void {
   const domain = retrieveDomain(event.params.node);
   // node + resource + record forms the id
+  // Convert `resource` to a fixed-length hexadecimal string
+  const resourceHex = event.params.resource
+    .toString(16) // Convert to hex string
+    .padStart(4, "0"); // Pad to 4 characters (assuming `resource` fits in 2 bytes)
+
+  // Create a unique ID by concatenating the hex strings
   const idString =
     event.params.node.toHexString() +
-    event.params.resource.toString() +
+    resourceHex +
     event.params.name.toHexString();
-  const id = Bytes.fromHexString(idString);
+
+  // Convert the ID string to a ByteArray
+  const id = Bytes.fromByteArray(ByteArray.fromHexString(idString));
+
   // Load DNSRecord entity
   let dnsRecord = DNSRecord.load(id);
   if (!dnsRecord) {
@@ -127,11 +138,19 @@ export function handleDNSRecordChanged(event: DNSRecordChangedEvent): void {
 }
 
 export function handleDNSRecordDeleted(event: DNSRecordDeletedEvent): void {
+  // Convert `resource` to a fixed-length hexadecimal string
+  const resourceHex = event.params.resource
+    .toString(16) // Convert to hex string
+    .padStart(4, "0"); // Pad to 4 characters (assuming `resource` fits in 2 bytes)
+
+  // Create a unique ID by concatenating the hex strings
   const idString =
     event.params.node.toHexString() +
-    event.params.resource.toString() +
+    resourceHex +
     event.params.name.toHexString();
-  const id = Bytes.fromHexString(idString);
+
+  // Convert the ID string to a ByteArray
+  const id = Bytes.fromByteArray(ByteArray.fromHexString(idString));
   // Load the DNSRecord entity
   let dnsRecord = DNSRecord.load(id);
 
