@@ -5,7 +5,7 @@ This repo contains multiple example implementations using The Graph.
 > [!NOTE]
 > This is a personal project created for fun and educational purposes. It is not affiliated with or officially endorsed by **The Graph**. The examples here are intended to help developers get started with The Graph and explore its capabilities.
 
-**This project is currently a work in progress!** 
+**This project is currently a work in progress!**
 I will be adding more examples as I thought of more examples
 
 ## The example implementations
@@ -13,7 +13,7 @@ I will be adding more examples as I thought of more examples
 <details>
   <summary>Token Tracker</summary>
 
-[Track and record token transfer activities for tokens](./token-tracker/README.md)
+[Track and record token transfer activities for tokens](./subgraphs/token-tracker/README.md)
 
 </details>
 
@@ -21,10 +21,11 @@ I will be adding more examples as I thought of more examples
   <summary>Template</summary>
 
 ### Counter Factory
-[Tracking and querying of multiple smart contracts deployed dynamically](./counter-template/README.md)
+
+[Tracking and querying of multiple smart contracts deployed dynamically](./subgraphs/counter-template/README.md)
 
 ### ENS Explorer
-[Track and query ENS domains and their associated details dynamically](./ens-explorer/README.md)
+
+[Track and query ENS domains and their associated details dynamically](./subgraphs/ens-explorer/README.md)
 
 </details>
-
