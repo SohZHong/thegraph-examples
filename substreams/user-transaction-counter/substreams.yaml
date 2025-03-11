@@ -27,16 +27,32 @@ binaries:
     file: ./target/wasm32-unknown-unknown/release/substreams.wasm
 
 modules:
+  # Store module for storing user transactions in a block
   - name: user_transaction_counter
     kind: store
     initialBlock: 325320000
-    updatePolicy: add
-    valueType: int64
+    updatePolicy: add # allow add operation
+    valueType: int64 # accepts int64 only
     inputs:
       - map: solana:blocks_without_votes
     blockFilter:
       module: solana:program_ids_and_accounts_without_votes
       query:
         string: program:TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA && account:JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN
+
+  # Map module for displaying results
+  - name: map_user_transaction_count
+    kind: map
+    initialBlock: 325320000
+    inputs:
+      - map: solana:blocks_without_votes # Received 'Block'
+      - store: user_transaction_counter # Receive self defined store module
+        mode: get
+    blockFilter:
+      module: solana:program_ids_and_accounts_without_votes
+      query:
+        string: (program:TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA && account:JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN)
+    output:
+      type: proto:mydata.v1.BlockUserData
 
 network: solana-mainnet-beta
