@@ -9,3 +9,15 @@ message MyData {
   uint64 transactions_len = 4;
   uint64 instructions_len = 5;
 }
+
+message UserData {
+  string user_address = 1;
+  uint64 transactions_count = 2;
+} 
+
+message BlockUserData {
+  string block_hash = 1;
+  uint64 block_slot = 2;
+  uint64 block_timestamp = 3;
+  repeated UserData users = 4;
+}
