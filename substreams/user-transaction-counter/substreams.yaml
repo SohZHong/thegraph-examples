@@ -1,10 +1,10 @@
 specVersion: v0.1.0
 package:
-  name: user_jup_transaction_tracker
+  name: user_transaction_counter
   version: v0.1.0
 
 imports:
-  solana: https://spkg.io/streamingfast/solana-common-v0.3.3.spkg
+  solana: https://spkg.io/streamingfast/solana-common-v0.3.0.spkg
 
 protobuf:
   files:
@@ -23,29 +23,23 @@ protobuf:
 
 binaries:
   default:
-    type: wasm/rust-v1+wasm-bindgen-shims
+    type: wasm/rust-v1
     file: ./target/wasm32-unknown-unknown/release/substreams.wasm
 
 modules:
-  - name: map_filtered_transactions
-    use: solana:transactions_by_programid_and_account_without_votes
-    initialBlock: 325320000
-
-  - name: user_transaction_counter
-    kind: store
-    inputs:
-      - map: map_filtered_transactions
-    updatePolicy: add
-    valueType: int64
-
-  - name: map_my_data
-    kind: map
-    inputs:
-      - map: map_filtered_transactions
-    output:
-      type: proto:mydata.v1.MyData
+ - name: map_my_data
+   kind: map
+   inputs:
+   - map: solana:blocks_without_votes
+   output:
+    type: proto:mydata.v1.MyData
+  # For performance, you should use a blockFilter whenever possible, like this:
+  #
+  # blockFilter:
+  #  module: solana:program_ids_without_votes
+  #  query:
+  #      string: program:4vMsoUT2BWatFweudnQM1xedRLfJgJ7hswhcpz4xgBTy
+  #
+  # see https://substreams.dev/streamingfast/solana-common/latest for details
 
 network: solana-mainnet-beta
-
-params:
-  map_filtered_transactions: program:TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA && account:JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN

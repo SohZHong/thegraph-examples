@@ -1,4 +1,4 @@
-# user_jup_transaction_tracker Substreams modules
+# user_transaction_counter Substreams modules
 
 This package was initialized via `substreams init`, using the `sol-minimal` template.
 
@@ -19,13 +19,7 @@ substreams registry publish       # Publish your Substreams to substreams.dev
 
 ## Modules
 
-### `map_filtered_transactions`
-
-This module retrieves Solana transactions filtered by one or several Program IDs.
-You will only receive transactions containing the specified Program IDs).
-
-**NOTE:** Transactions containing voting instructions will NOT be present.
-
 ### `map_my_data`
 
-This module allows you to create transformations on the filtered transactions.
+This module will do a simple computation of the number of **transactions**
+and the number of **instructions** in each block.
